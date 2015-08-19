@@ -1,0 +1,6 @@
+# redirect all traffic to www subdomain
+
+server {
+        server_name jdloft.com;
+        return 301 $scheme://www.jdloft.com$request_uri;
+}
