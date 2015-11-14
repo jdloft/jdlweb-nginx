@@ -1,11 +1,15 @@
-# jdloft landing page
+# jdloft landing page (SSL)
 
 server {
-	listen 80;
-	listen [::]:80 ipv6only=on;
+	listen 443 ssl;
+	listen [::]:443 ipv6only=on ssl;
 
 	server_name www.jdloft.com;
 	root /srv/www/jdlweb;
+
+	# SSL
+	ssl_certificate /etc/letsencrypt/live/jdloft.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/jdloft.com/privkey.pem;
 
 	index index.html index.htm;
 
