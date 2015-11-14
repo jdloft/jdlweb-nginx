@@ -1,8 +1,8 @@
 # redirect all traffic to www subdomain
 
 server {
-        listen 80;
-        listen 443 ssl;
-        server_name jdloft.com;
-        return 301 $scheme://www.jdloft.com$request_uri;
+    listen 80;
+    listen 443 ssl;
+    server_name jdloft.com;
+    return 301 $scheme://www.jdloft.com$request_uri;
 }

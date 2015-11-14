@@ -1,37 +1,37 @@
 # jdloft landing page
 
 server {
-	listen 80;
-	listen [::]:80 ipv6only=on;
+    listen 80;
+    listen [::]:80 ipv6only=on;
 
-	server_name www.jdloft.com;
-	root /srv/www/jdlweb;
+    server_name www.jdloft.com;
+    root /srv/www/jdlweb;
 
-	index index.html index.htm;
+    index index.html index.htm;
 
-	# private files
-	location ~ /Dockerfile {
-		deny all;
-		return 404;
-	}
+    # private files
+    location ~ /Dockerfile {
+        deny all;
+        return 404;
+    }
 
-	location ~ /\.git {
-		access_log off;
-		log_not_found off;
-		deny all;
-		return 404;
-	}
+    location ~ /\.git {
+        access_log off;
+        log_not_found off;
+        deny all;
+        return 404;
+    }
 
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-		# Uncomment to enable naxsi on this location
-		# include /etc/nginx/naxsi.rules
-	}
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+        # Uncomment to enable naxsi on this location
+        # include /etc/nginx/naxsi.rules
+    }
 
-	error_page 403 /403.html;
-	error_page 404 /404.html;
+    error_page 403 /403.html;
+    error_page 404 /404.html;
 
-	error_page 500 502 503 504 /50x.html;
+    error_page 500 502 503 504 /50x.html;
 }
