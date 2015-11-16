@@ -1,11 +1,33 @@
 # jdloft landing page
-
-server {
+server { # redirect HTTP to HTTPS
     listen 80;
-    listen [::]:80 ipv6only=on;
+    server_name jdloft.com www.jdloft.com;
+    return 301 https://$server_name$request_uri;
+}
+
+server { # redirect from bare domain to www domain
+    listen 443 ssl;
+
+    # SSL
+    ssl_certificate /etc/letsencrypt/live/jdloft.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jdloft.com/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    server_name jdloft.com;
+    return 301 $scheme://www.jdloft.com$request_uri;
+}
+
+server { # real content
+    listen 443 ssl;
+    listen [::]:443 ipv6only=on ssl;
 
     server_name www.jdloft.com;
     root /srv/www/jdlweb;
+
+    # SSL
+    ssl_certificate /etc/letsencrypt/live/jdloft.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jdloft.com/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     index index.html index.htm;
 
