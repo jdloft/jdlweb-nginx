@@ -1,11 +1,23 @@
 # phpMyAdmin
 
-server {
+server { # redirect HTTP to HTTPS
     listen 80;
-
-    root /usr/share/phpmyadmin;
-    index index.php index.html index.htm;
     server_name pma.jdloft.com;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443;
+
+    server_name pma.jdloft.com;
+    root /usr/share/phpmyadmin;
+
+    # SSL
+    ssl_certificate /etc/letsencrypt/live/jdloft.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jdloft.com/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    index index.php index.html index.htm;
 
     location / {
         try_files $uri $uri/ =404;
