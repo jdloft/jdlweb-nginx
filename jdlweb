@@ -1,4 +1,5 @@
 # jdloft landing page
+
 server { # redirect HTTP to HTTPS
     listen 80;
     server_name jdloft.com www.jdloft.com;
